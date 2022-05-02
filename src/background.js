@@ -25,7 +25,7 @@ function renderHTML(data) {
             <img class="icon-image" src="${chrome.runtime.getURL(
               "media/AttackSpeed.png"
             )}" alt="" />
-            <div>${data['attack speed']}</div>
+            <div>${data["attack speed"]}</div>
           </div>
           <div>
             <img class="icon-image" src="${chrome.runtime.getURL(
@@ -43,7 +43,7 @@ function renderHTML(data) {
             <img class="icon-image" src="${chrome.runtime.getURL(
               "media/MoveSpeed.png"
             )}" alt="" />
-            <div>${data['movement speed']}</div>
+            <div>${data["movement speed"]}</div>
           </div>
           <div>
             <img class="icon-image" src="${chrome.runtime.getURL(

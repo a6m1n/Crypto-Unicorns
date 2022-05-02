@@ -5,11 +5,11 @@ const assetsTable = document.querySelector(
 
 const fetchUnicornData = (link, callBack) => {
   $.get(link, function (data) {
-    var data = $(data);
+    var datajq = $(data);
 
-    const item = data.filter((item) => {
-      return data[item].id === "__next";
-    })[0];
+    const [item] = datajq.filter((item) => {
+      return datajq[item].id === "__next";
+    });
 
     const statsMapper = {};
 
@@ -31,7 +31,12 @@ const fetchUnicornData = (link, callBack) => {
 };
 
 const getUnicornLink = (hoverEvent) => {
-  return hoverEvent.fromElement.parentElement.parentElement.href;
+  return hoverEvent.path.find((item) => {
+    return (
+      item.href &&
+      !item.className.toLowerCase().includes("assetcardfooter--collection-name")
+    );
+  });
 };
 
 function debounce(func, timeout = 500) {
@@ -61,6 +66,7 @@ const createTable = (left, top, unicornDetailLink) => {
     left: ${left}px;
     top: ${top}px;
   `;
+  table.innerHTML = "<div>Loading...</>";
 
   return table;
 };
