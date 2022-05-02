@@ -127,8 +127,6 @@ const createDOMchecker = (observere) => {
 
   var observer = new MutationObserver(handleDOMMutation);
 
-  console.log("2");
-
   observer.observe(observere, {
     subtree: true,
     childList: true,
@@ -142,17 +140,11 @@ const createURLObserver = () => {
   let previousUrl = "";
 
   const observer = new MutationObserver(function (mutations) {
-    console.log(
-      location.href !== previousUrl,
-      location.href === rootURL,
-      location.href,
-      rootURL
-    );
     if (location.href !== previousUrl && location.href === rootURL) {
       createDOMchecker(assetsTable);
       addHoverEffect();
-      console.log("run");
     }
+
     if (location.href !== previousUrl) {
       previousUrl = location.href;
     }

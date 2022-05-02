@@ -114,8 +114,6 @@ function renderHTML(data) {
 }
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  console.log("request", request);
-
   if (request.type === "render_unicorn_data") {
     sendResponse({ html: renderHTML(request.data) });
     return true;
