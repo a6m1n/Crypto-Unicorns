@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Crypto Unicorns Info",
+  "version": "0.1.0",
+  "content_scripts": [
+    {
+      "matches": ["https://opensea.io/collection/crypto-unicorns-market"],
+      "js": ["src/utils.js", "src/index.js"],
+      "css": ["styles/style.css"]
+    }
+  ],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "permissions": ["storage"],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "media/Accuracy.png",
+        "media/Attack.png",
+        "media/AttackSpeed.png",
+        "media/Defense.png",
+        "media/Magic.png",
+        "media/MoveSpeed.png",
+        "media/Speed.png",
+        "media/Vitality.png"
+      ],
+      "matches": ["https://opensea.io/*"]
+    }
+  ]
+}
