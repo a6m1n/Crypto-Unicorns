@@ -1,6 +1,5 @@
 function run() {
-  createDOMchecker();
-  addHoverEffect();
+  createURLObserver();
 }
 
 run();

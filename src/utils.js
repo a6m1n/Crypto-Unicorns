@@ -2,6 +2,7 @@ const popupId = "crypto_unicorns_info";
 const assetsTable = document.querySelector(
   '.collection--results div[role="grid"]'
 );
+const rootURL = "https://opensea.io/collection/crypto-unicorns-market";
 
 const fetchUnicornData = (link, callBack) => {
   $.get(link, function (data) {
@@ -117,7 +118,7 @@ const addHoverEffect = () => {
 
 const onDOMMutation = (mutations, observer) => addHoverEffect();
 
-const createDOMchecker = () => {
+const createDOMchecker = (observere) => {
   // checks when the dom changes
 
   MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
@@ -126,8 +127,37 @@ const createDOMchecker = () => {
 
   var observer = new MutationObserver(handleDOMMutation);
 
-  observer.observe(assetsTable, {
+  console.log("2");
+
+  observer.observe(observere, {
     subtree: true,
     childList: true,
+    attributes: true,
   });
+};
+
+const createURLObserver = () => {
+  // our application have to urls observe because opensea is SPA
+
+  let previousUrl = "";
+
+  const observer = new MutationObserver(function (mutations) {
+    console.log(
+      location.href !== previousUrl,
+      location.href === rootURL,
+      location.href,
+      rootURL
+    );
+    if (location.href !== previousUrl && location.href === rootURL) {
+      createDOMchecker(assetsTable);
+      addHoverEffect();
+      console.log("run");
+    }
+    if (location.href !== previousUrl) {
+      previousUrl = location.href;
+    }
+  });
+
+  const config = { subtree: true, childList: true };
+  observer.observe(document, config);
 };
