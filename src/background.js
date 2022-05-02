@@ -1,4 +1,4 @@
-function renderHTML() {
+function renderHTML(data) {
   return `
       <div class="header">
         <div class="w-40">Breading points</div>
@@ -13,49 +13,49 @@ function renderHTML() {
             <img class="icon-image" src="${chrome.runtime.getURL(
               "media/Accuracy.png"
             )}" alt="" />
-            <div>123</div>
+            <div>${data.accuracy}</div>
           </div>
           <div>
             <img class="icon-image" src="${chrome.runtime.getURL(
               "media/Attack.png"
             )}" alt="" />
-            <div>124</div>
+            <div>${data.accuracy}</div>
           </div>
           <div>
             <img class="icon-image" src="${chrome.runtime.getURL(
               "media/AttackSpeed.png"
             )}" alt="" />
-            <div>123</div>
+            <div>${data['attack speed']}</div>
           </div>
           <div>
             <img class="icon-image" src="${chrome.runtime.getURL(
               "media/Defense.png"
             )}" alt="" />
-            <div>123</div>
+            <div>${data.defense}</div>
           </div>
           <div>
             <img class="icon-image" src="${chrome.runtime.getURL(
               "media/Magic.png"
             )}" alt="" />
-            <div>123</div>
+            <div>${data.magic}</div>
           </div>
           <div>
             <img class="icon-image" src="${chrome.runtime.getURL(
               "media/MoveSpeed.png"
             )}" alt="" />
-            <div>123</div>
+            <div>${data['movement speed']}</div>
           </div>
           <div>
             <img class="icon-image" src="${chrome.runtime.getURL(
               "media/Speed.png"
             )}" alt="" />
-            <div>123</div>
+            <div>${data.resistance}</div>
           </div>
           <div>
             <img class="icon-image" src="${chrome.runtime.getURL(
               "media/Vitality.png"
             )}" alt="" />
-            <div>123</div>
+            <div>${data.vitality}</div>
           </div>
         </div>
       </div>
@@ -117,7 +117,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   console.log("request", request);
 
   if (request.type === "render_unicorn_data") {
-    sendResponse({ html: renderHTML() });
+    sendResponse({ html: renderHTML(request.data) });
     return true;
   }
 });
