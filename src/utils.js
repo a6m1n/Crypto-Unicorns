@@ -1,4 +1,7 @@
 const popupId = "crypto_unicorns_info";
+const assetsTable = document.querySelector(
+  '.collection--results div[role="grid"]'
+);
 
 function debounce(func, timeout = 500) {
   let timer;
@@ -63,7 +66,7 @@ const handleHover = (event) => {
   elementForCalcLeft.onmouseleave = (event) => handleLeave(event, table);
 };
 
-function addHoverEffect() {
+const addHoverEffect = () => {
   // fired when a mutation occurs
 
   const unicornList = getAllUnicorns();
@@ -73,3 +76,18 @@ function addHoverEffect() {
 }
 
 const onDOMMutation = (mutations, observer) => addHoverEffect();
+
+const createDOMchecker = () => {
+  // checks when the dom changes
+
+  MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+
+  const handleDOMMutation = debounce(onDOMMutation);
+
+  var observer = new MutationObserver(handleDOMMutation);
+
+  observer.observe(assetsTable, {
+    subtree: true,
+    childList: true,
+  });
+};
