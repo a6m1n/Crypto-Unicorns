@@ -39,12 +39,24 @@ const handleLeave = (event, element) => {
   element.remove();
 };
 
+const calcLeft = (left, width) => {
+  const defaultWith = 400;
+
+  if (screen.width > defaultWith + left) {
+    return left + width;
+  }
+
+  return left - defaultWith;
+};
+
 const handleHover = (event) => {
   const elementForCalcLeft = event.path[0];
 
   const { left, width } = elementForCalcLeft.getBoundingClientRect();
 
-  const table = createTable(left + width, event.pageY);
+  const leftWithScreenBorder = calcLeft(left, width);
+
+  const table = createTable(leftWithScreenBorder, event.pageY);
   const main = document.querySelector("main#main");
   main.appendChild(table);
 
